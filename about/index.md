@@ -3,6 +3,7 @@ layout: page
 title: Ulysse Vautier
 tags: [about, Jekyll, theme, moon]
 date: 2018/04/26
+sitemap: true
 comments: false
 ---
 
