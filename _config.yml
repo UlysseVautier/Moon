@@ -8,7 +8,7 @@ logo:               'assets/img/logo.png'
 background:         'assets/img/placeholder-big.jpg'
 tiled_bg:           false   # Set this true if you want to tile your background image, otherwise it will be covered
 locale:             en_US
-url:                https://ulyssevautier@github.io
+url:                https://ulyssevautier.github.io
 
 # Jekyll
 permalink:          /:title/
@@ -40,7 +40,7 @@ disqus_shortname:   Ulysse
 email:				ulysse.vautier@plymouth.ac.uk
 #twitter:            username
 facebook:           ulysse.vautier
-github-url:         https://ulyssevautier.github.io/
+github-url:         ulyssevautier
 #stackoverflow:     123456/username   from a "http://stackoverflow.com/users/123456/username" link
 linkedin:          ulysse-vautier-b3544269
 #xing:              username
