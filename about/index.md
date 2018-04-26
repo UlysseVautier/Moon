@@ -1,8 +1,8 @@
 ---
 layout: page
-title: About the Theme
+title: Ulysse Vautier
 tags: [about, Jekyll, theme, moon]
-date: 2016-03-21
+date: 2018/04/26
 comments: false
 ---
 
@@ -12,5 +12,3 @@ MEng in Intelligent Systems, Robotics, Polytech Paris-UPMC, France
 
 ## Background
 R&D Software and Hardware Engineer at BLUE FROG ROBOTICS, Paris, France
-
-## Papers

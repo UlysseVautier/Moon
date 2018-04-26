@@ -63,11 +63,12 @@ linkedin:          ulysse-vautier-b3544269
 #hackernews:        username
 
 # Gems
-gems:
+puglins:
   - jekyll-mentions
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-gist
+  - jekyll-seo-tag
 
 jekyll-mentions:
     base_url: https://github.com
