@@ -50,7 +50,7 @@ The hardware is built to have access to all of that, and be able to apply contro
 
 ### Robustness and Ergonomics
 
-The hardware in the sailboat was built while keeping into mind robustness and ergonomics. This might sound contradictory but actually most of the time a tough product is a good product. (a good product is not necessarily a tough product).
+The hardware in the sailboat was built while keeping in mind robustness and ergonomics. This might sound contradictory but actually most of the time a tough product is a good product. (a good product is not necessarily a tough product).
 But this doesn't seem as easy as just saying "Let's do a robust robot with a nice design !" and that's it. 
 A lot of time thinking about all the potential use of the hardware must be examined and solved.
 The first and obvious challenge making a hardware for a sailboat is waterproofing ! (or weatherproofing).
