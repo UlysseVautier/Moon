@@ -8,7 +8,7 @@ comments: true
 ---
 
 <figure>
-	<a href="https://plymouth-sailboat.github.io/"><img src="https://raw.githubusercontent.com/Plymouth-Sailboat/plymouth-sailboat.github.io/master/img/bigboat.jpg"></a>
+	<a href="https://plymouth-sailboat.github.io/"><img src="https://raw.githubusercontent.com/UlysseVautier/ulyssevautier.github.io/master/assets/img/bigboat.jpg"></a>
 	<figcaption><a href="https://plymouth-sailboat.github.io/" title="Autonomous Sailboat">The big boat on which research is done (2m length)</a>.</figcaption>
 </figure>
 
