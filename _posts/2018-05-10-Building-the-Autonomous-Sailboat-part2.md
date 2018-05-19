@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Building the Autonomous Sailboat (Part 1)"
+title: "Building the Autonomous Sailboat (Part 2)"
 date: 2018-05-10
 excerpt: "Building the Autonomous Sailboat. Software Part concerning the inside of the Arduino and the Raspberry Pi"
 tags: [Autonomous, Sailboat, Software, Arduino, Raspberry Pi, ROS]
