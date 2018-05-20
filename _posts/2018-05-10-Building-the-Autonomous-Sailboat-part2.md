@@ -23,7 +23,9 @@ The [Arduino](https://github.com/Plymouth-Sailboat/SailBoatArduinoInterface) sou
 
 ## The Arduino
 
-The Arduino Mega acquires all the data from the sensors and acts on the actuators (sail and rudder). It is basically the lowest level of decision making computer on the boat. That is why its code has to be robust and secure. It also has to be configurable and depend on the hardware of the boat. I will talk about this component based software architecture here. But first of all let's see how the code is done in the Arduino
+The Arduino Mega acquires all the data from the sensors and acts on the actuators (sail and rudder). It is basically the lowest level of decision making computer on the boat. That is why its code has to be robust and secure. It also has to be configurable and depend on the hardware of the boat. I will talk about this component based software architecture here. But first of all let's see how the code is done in the Arduino.
+
+To see for yourself all of the source code, don't hesitate to look at the [Arduino](https://github.com/Plymouth-Sailboat/SailBoatArduinoInterface) repository with all the source-code inside.
 
 ### The Code Inside the Chip
 
@@ -81,14 +83,79 @@ This architecture is quite simple and is basically what C++ offers with polymorp
 
 ### Libraries
 
+As you understand now, the libraries that were made for our boats are each of the components interfaces : the sensors and motors, and the Sailboat entity interface. We have a wind sensor library, an IMU (XSens) library, a GPS library and a Sailboat library. The controllers are not in libraries but directly as classes inside the .ino (Arduino project file) to be able to change them easily.
+
 ### Configuration
+
+To be able to configure easily the boats configuration related to its sensors (e.g. sensors offsets, values, pin number, I2C address, etc...) a configuration header is put in the Sailboat library. This configuration file only contains `#define` and `#ifdef` for each element used by the libraries.
+
+That way, to change from one boat to the other, you only need to `#define SAILBOAT_SMALL` or `#define SAILBOAT_BIG` for our cases.
+
+### Communication to the Raspberry Pi
+
+To communicate to the raspberry pi, we use the [rosserial-arduino](http://wiki.ros.org/rosserial_arduino) package from ROS. That way we don't need to create our own protocol which could take a long time. Also this makes it possible for the Arduino to be completely compatible with ROS and subscribing and publishing to topics easily. Be careful that this package is big and takes a lot of space in the Arduino Mega.
+
+Each components have their `communicateData()` function in which they send the message to the topic they are publishing to.
+
+### Modes
+
+What we call modes in the Arduino is the Controllers. The Sailboat has a container of Controller that it sets corresponding to the message the raspberry pi sends him. It corresponds to basic controllers on the rudder and sail. Each of the controller waits for a message with the according information from the Raspberry Pi. We have :
+
+* Rudder and Sail control : Rudder and Sail are directly taken from the Raspberry Pi message
+* Only Rudder control : the optimal Sail angle is applied to the Sail
+* Sail and cap control : Sail angle is taken from the Raspberry Pi and the rudder is put according to the cap
+* Heading control : With only a cap, the sail and the rudder are controlled accordingly
+
+Then we have special controllers that don't need the Raspberry Pi. They are meant in case the Raspberry Pi don't respond :
+
+* Return Home control : The sailboat goes to the GPS point it first saw when it was turned on
+* RC control : The radio controller takes over everything
+
+You can see the whole explaination at the [Arduino Wiki](https://github.com/Plymouth-Sailboat/SailBoatArduinoInterface/wiki/Arduino-Mode)
+
+### Watchdogs and Security
+
+For this kind of robots, it is always good to have some securities in case anything goes wrong. As the Arduino is the last computer that directly commands the actuators and sensors, it has to have some security if things are broken.
+
+For that, we put watchdogs which will automatically put the sailboat in "safe" mode so that we can retreive it easily.  
+First of all, when the boat is turned on, all the sails are opened at maximum so that the wind don't tear the sails or push the boat in the water.  
+Once it is controlled by the Raspberry Pi, the latter has to send every 30 seconds a message to tell the Arduino it is awake. That way if the Raspberry Pi don't respond anymore, the Arduino puts itself in *Return Home control* to be able to retreive it.  
+One last watchdog is inside the Arduino. If a bug happens (no controller at all in the Sailboat), the Arduino resets and put the *Return Home control*.
 
 ## Raspberry Pi/ROS
 
+The Raspberry Pi only does the high level control such as path-planning, intensive calculation controllers and more. The Raspberry Pi runs with ROS for its controllers. It receives all the sensors data from the Arduino and can send messages to the Arduino asking it to put certain angles to the sail and rudder. As you have seen above, because the Arduino is using rosserial-arduino package, it directly sends the sensors data to ROS topics that controllers on the Raspberry Pi can subscribe to. We will look at the architecture that was done here to simplify the making of controllers.
+
+<figure>
+	<a href="https://github.com/Plymouth-Sailboat/SailBoatArduinoInterface"><img src="https://raw.githubusercontent.com/UlysseVautier/ulyssevautier.github.io/master/assets/img/raspberrypi3.jpg"></a>
+	<figcaption>Raspberry Pi 3 Model B</figcaption>
+</figure>
+
 ### Features
+
+We use ROS as a middleware for our controllers. It enables us to use other well-known packages in the ROS community. But that also means we have to standardize our nodes to be compatible with other packages as much as possible.
+
+For this, the messages sent to or from the Arduino are all standard messages, used for other packages.
+
+By doing this, we also become compatible to Gazebo simulator for example, by adding a URDF or frames to our boat.
 
 ### Class Architecture
 
+We again highly use polymorphism to simplify the work. I will mostly talk about the C++ part, but a python structure has been done the same way for python users.
+
+The same way as the Arduino, we have a controller that derives from the Controller class that has 2 simple methods : `setup()` and `control()`. When making a controller, you only need to implement those to get the controller working.
+
+The class above called Controller implements all the initialization, subscribing to all the topics from the Arduino and resetting the watchdog of the Arduino. All this is done automatically when the `setup()` method is called from the derived class.
+
 ### List of Controllers
 
+At the moment of this writing, some simple controllers have been implemented :
+
+* Potential Field : the well known potential field algorithm for robots navigation
+* Waypoint Follower : Simplest algorithm wher the boat goes from one GPS point to the other
+* Line Follower : The boat tries to get from one point to the other while following the line between those two points
+* Position Keeping : An algorithm where the boat tries to stop at a certain GPS point
+
 ### Making Your Own Controllers
+
+For details about all that has been said, a wiki was done at the repositories : [Sailboat ROS](https://github.com/Plymouth-Sailboat/SailBoatROS/wiki) and [Arduino Wiki](https://github.com/Plymouth-Sailboat/SailBoatArduinoInterface/wiki)
