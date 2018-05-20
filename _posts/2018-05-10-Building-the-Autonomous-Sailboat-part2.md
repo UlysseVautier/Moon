@@ -127,7 +127,7 @@ One last watchdog is inside the Arduino. If a bug happens (no controller at all 
 The Raspberry Pi only does the high level control such as path-planning, intensive calculation controllers and more. The Raspberry Pi runs with ROS for its controllers. It receives all the sensors data from the Arduino and can send messages to the Arduino asking it to put certain angles to the sail and rudder. As you have seen above, because the Arduino is using rosserial-arduino package, it directly sends the sensors data to ROS topics that controllers on the Raspberry Pi can subscribe to. We will look at the architecture that was done here to simplify the making of controllers.
 
 <figure>
-	<a href="https://github.com/Plymouth-Sailboat/SailBoatArduinoInterface"><img src="https://raw.githubusercontent.com/UlysseVautier/ulyssevautier.github.io/master/assets/img/raspberrypi3.jpg"></a>
+	<a href="https://github.com/Plymouth-Sailboat/SailBoatROS"><img src="https://raw.githubusercontent.com/UlysseVautier/ulyssevautier.github.io/master/assets/img/raspberrypi3.jpg"></a>
 	<figcaption>Raspberry Pi 3 Model B</figcaption>
 </figure>
 
