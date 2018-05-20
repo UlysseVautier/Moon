@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Building the Autonomous Sailboat (Part 1)"
+title: "Building the Autonomous Sailboat (Part 2)"
 date: 2018-05-10
 excerpt: "Building the Autonomous Sailboat. Software Part concerning the inside of the Arduino and the Raspberry Pi"
 tags: [Autonomous, Sailboat, Software, Arduino, Raspberry Pi, ROS]
@@ -8,7 +8,7 @@ comments: true
 ---
 
 <figure>
-	<a href="https://plymouth-sailboat.github.io/"><img src="https://raw.githubusercontent.com/Plymouth-Sailboat/plymouth-sailboat.github.io/master/img/bigboat.jpg"></a>
+	<a href="https://plymouth-sailboat.github.io/"><img src="https://raw.githubusercontent.com/UlysseVautier/ulyssevautier.github.io/master/assets/img/bigboat.jpg"></a>
 	<figcaption><a href="https://plymouth-sailboat.github.io/" title="Autonomous Sailboat">The big boat on which research is done (2m length)</a>.</figcaption>
 </figure>
 
