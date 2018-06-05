@@ -77,7 +77,7 @@ The *System* in our case is the Arduino ino code which instantiate the Sailboat 
 This architecture is quite simple and is basically what C++ offers with polymorphism : being able to group classes with the same behaviours and call them all whatever specific methods or variables they have.
 
 <figure>
-	<a href="https://github.com/Plymouth-Sailboat/SailBoatArduinoInterface"><img src="https://raw.githubusercontent.com/UlysseVautier/ulyssevautier.github.io/master/assets/img/arduinoarchitecture.bmp"></a>
+	<a href="https://github.com/Plymouth-Sailboat/SailBoatArduinoInterface"><img src="https://raw.githubusercontent.com/UlysseVautier/ulyssevautier.github.io/master/assets/img/arduinoarchitecture.png"></a>
 	<figcaption>Software Architecture inside the Arduino</figcaption>
 </figure>
 
